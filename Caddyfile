@@ -1,0 +1,22 @@
+{
+    admin off
+    persist_config off
+    auto_https off
+}
+
+:{$PORT:8080} {
+
+    encode gzip
+
+    # API requests go to Spring Boot
+    handle /api/* {
+        reverse_proxy {$BACKEND_URL}
+    }
+
+    # Everything else is handled by React
+    handle {
+        root * /app/dist
+        try_files {path} /index.html
+        file_server
+    }
+}

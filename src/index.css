@@ -1,0 +1,635 @@
+/* =========================================================
+   ROOT / DESIGN TOKENS
+========================================================= */
+
+:root {
+  --font-sans:
+    'Inter',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+
+  --font-heading: 'Plus Jakarta Sans', var(--font-sans);
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Colors */
+  --bg-app: #0f172a;
+  --bg-sidebar: #1e293b;
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+  --bg-input: #0f172a;
+  --bg-elevated: #334155;
+
+  --border-color: #334155;
+  --border-focus: #6366f1;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
+
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-light: rgba(99, 102, 241, 0.15);
+
+  --accent: #38bdf8;
+  --accent-light: rgba(56, 189, 248, 0.15);
+
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.12);
+
+  --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.12);
+
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.12);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-sm:
+    0 1px 2px rgba(0, 0, 0, 0.2);
+
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2);
+
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.4),
+    0 4px 6px -2px rgba(0, 0, 0, 0.25);
+
+  /* Transitions */
+  --transition-fast:
+    150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --transition-normal:
+    250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg-app);
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+
+  font-family: var(--font-sans);
+
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+
+  line-height: 1.5;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button {
+  font-family: var(--font-sans);
+
+  cursor: pointer;
+
+  border: none;
+  outline: none;
+
+  box-sizing: border-box;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
+
+input,
+textarea,
+select {
+  font-family: var(--font-sans);
+  outline: none;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PASSWORD INPUT
+========================================================= */
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none !important;
+
+  width: 0 !important;
+  height: 0 !important;
+}
+
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+
+  position: absolute !important;
+  right: 0 !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+
+/* =========================================================
+   ANIMATION UTILITIES
+========================================================= */
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
+/* =========================================================
+   LUCIDE / SVG ICON RESET
+========================================================= */
+
+/*
+  IMPORTANT:
+
+  Do NOT add:
+
+  margin: auto;
+
+  here.
+
+  Doing that globally causes icons in:
+  - sidebar
+  - buttons
+  - document metadata
+  - dashboard cards
+  - chat
+  - forms
+
+  to shift away from their intended positions.
+*/
+
+svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   STANDARD CENTERED ICON BOX
+========================================================= */
+
+/*
+  Use:
+
+  <div className="icon-box-center">
+    <Bot />
+  </div>
+
+  whenever an icon needs to be centered inside a square,
+  circle or rounded rectangle.
+*/
+
+.icon-box-center {
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  flex-shrink: 0 !important;
+
+  padding: 0 !important;
+
+  line-height: 0 !important;
+
+  text-align: center !important;
+
+  position: relative;
+}
+
+
+/* =========================================================
+   ICON INSIDE CENTERED BOX
+========================================================= */
+
+.icon-box-center>svg {
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  flex: 0 0 auto !important;
+
+  position: static !important;
+
+  transform: none !important;
+}
+
+
+/* =========================================================
+   BUTTON ICON ALIGNMENT
+========================================================= */
+
+button svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LINK ICON ALIGNMENT
+========================================================= */
+
+a svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   AUTH PAGE HELPERS
+========================================================= */
+
+/*
+  Used for login/register page logo boxes.
+*/
+
+.auth-logo-box {
+  width: 52px;
+  height: 52px;
+
+  min-width: 52px;
+  min-height: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 0;
+
+  line-height: 0;
+
+  flex-shrink: 0;
+}
+
+.auth-logo-box>svg {
+  display: block;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  flex: none;
+}
+
+
+/* =========================================================
+   AUTH SUBMIT BUTTON
+========================================================= */
+
+.auth-submit-button {
+  width: 100%;
+  height: 48px;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  text-align: center;
+
+  line-height: 1;
+
+  box-sizing: border-box;
+}
+
+.auth-submit-button>span {
+  display: inline-block;
+
+  margin: 0;
+  padding: 0;
+
+  line-height: 1;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   SIDEBAR - DESKTOP BASE
+========================================================= */
+
+.sidebar-responsive {
+  width: 260px;
+
+  transform: translateX(0);
+
+  will-change: transform;
+}
+
+
+/* =========================================================
+   MOBILE CLOSE BUTTON
+========================================================= */
+
+.mobile-only-close {
+  display: none;
+}
+
+
+/* =========================================================
+   SIDEBAR BACKDROP
+========================================================= */
+
+.sidebar-backdrop {
+  display: none;
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.mobile-menu-btn {
+  display: none !important;
+}
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+@media (max-width: 768px) {
+
+  /* Hamburger */
+
+  .mobile-menu-btn {
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  /* Sidebar */
+
+  .sidebar-responsive {
+    width: 260px !important;
+
+    max-width: 85vw;
+
+    transform: translateX(-100%) !important;
+
+    z-index: 100 !important;
+
+    box-shadow:
+      10px 0 30px rgba(0, 0, 0, 0.35);
+  }
+
+
+  /* Open sidebar */
+
+  .sidebar-responsive.sidebar-mobile-open {
+    transform: translateX(0) !important;
+  }
+
+
+  /* Close button */
+
+  .mobile-only-close {
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  /* Backdrop */
+
+  .sidebar-backdrop {
+    display: block;
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background:
+      rgba(2, 6, 23, 0.62);
+
+    backdrop-filter: blur(3px);
+
+    -webkit-backdrop-filter:
+      blur(3px);
+
+    z-index: 90;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP SIDEBAR
+========================================================= */
+
+@media (min-width: 769px) {
+
+  .sidebar-responsive {
+    transform:
+      translateX(0) !important;
+  }
+
+  .mobile-only-close {
+    display: none !important;
+  }
+
+  .sidebar-backdrop {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE DEVICES
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .sidebar-responsive {
+    width: 280px !important;
+    max-width: 82vw;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior:
+      auto !important;
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
+}
